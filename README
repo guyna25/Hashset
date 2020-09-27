@@ -1,0 +1,82 @@
+guyna25
+
+
+
+=============================
+=      File description     =
+=============================
+
+SimpleHashSet.java - Abstract class which contains method that are common for open and closed hash sets
+
+ClosedHashSet.java - a closed hashset implementation
+
+OpenHashSet.java - a open hashset implementation
+
+SimpleSetPerformanceAnalyzer.java - this object measures the running time of various operations with different
+ kinds of hashsets
+
+LinkedListWrapper.java -  A wrapper for the linked list to be used to create linked list arrays
+
+CollectionFacadeSet.java - Facade for java's collection
+
+=============================
+=          Design           =
+=============================
+
+The main methodology of the implementation maximizes encapsulation and simplfying all APIS as much as possbile.
+ I also wanted to make debugging as easy as possible so I tried to concentrate each 'job' that needs to get
+ done in each file to a single method.
+ I chose to use collectionfacadeset, honestly, just because it was a written option in the excercise and I
+ wanted to focus more on creating the best hashset I can with my knowledge.
+Furthermore, most of the design was dictated by the excercise description
+
+=============================
+=  Implementation details   =
+=============================
+Regarding excercise README questions:
+
+-Openhashset's implementation was pretty straight forward from the excercise description. I only had to
+seperate the method involving putting values in the hash set from the ones which receive a value to be added
+to enable modularity and to make rehashing easier, e.g, hashElement is seperated from add since hashElement is
+ used in several places in the code.
+
+ -Deletion in closed hashset was a learning process as intialy I tried to enter an integer constant cast as an
+  object but it gave out a arrayStoreExpection since arrays apparently reads the constant as the lowest type
+  it is, after some attemps I figured I can reference to a null pointer of a string which enables me to mark
+  certain valeus as null but a *specific* null value. This solved the empty flags problem without any bugs.
+
+
+-Bad results for data1.txt:
+-OpenHashset - open hashset is a very blunt way of hashing since it doesn't have any method for collision,
+other than jamming all of them at the same place. That means that even as the data entered gets bigger the
+time complexity stays the same and does not become more efficent, which means that openhash set takes more and
+ more time to hash as you enter more data which makes it a pretty bad method. It can be improbed by
+ incorparating a more complex way of hashing to make collisions less common
+ -Closed hashing is a bit less space consuming but is definetly as inefficent as open hashing since it hashes
+ in a way that does not give a unique identity to none identical strings and therefore many strings can have
+ the same hash value, and each string like that increase the run time by a growing rate since every time itll
+ collide and will have to further probe throught the array
+
+-Strengths and weaknesses summary
+Obviously I wouldn't use my sets for anything because its results were always the worst. Regarding java's sets
+ I think hashset is the the best for handling data that has a high number of collisions such as data1 since it
+  has the best performance both in searching and adding data. Though for data2 that is uniformly distribuited
+  you can see that tree set really shines both in adding and searching for data. I think the names imply the
+  reason this happens, since tree set is more focused on storing different objects (like in a binray tree) and
+   hashset is more focused on efficently handling the hashing. Linked list seems to be bad for everything, I
+   am really sad for the person who wrote that set.
+
+ -compare between close and open
+ Both hash sets were rather slow. Open hashset might be better at inserting values but closed hash set it far
+ better at searching for strings inside the set. This is due to open hashset using a very rigid way of solving
+  collisions - it shoves them into the same place using a linked list. WHile this enables fast inserting it
+  makes searching the set quie diffucult
+
+ -compare to java's built in set
+ well, once again, open and closed hash set did poorly in comparison to all of them and even to linked list
+ which should be somewhat similar. I do believe java's sets are designed better for larger pieces of
+  data and have more sophisticated inner mechanism to determine hashcodes. Also, ,my closed and open hash use
+  up a lot of memory which wasn't compared in the scope of this excercise and is also important
+
+
+
